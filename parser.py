@@ -14,30 +14,19 @@ def parse_ethernet(buf):
 
 def parse_arp(arp: dpkt.arp.ARP):
     # * print Type, MAC Src, MAC Dst, IP Src, IP Dst
-    """
-    sequenceDiagram
-        Note over 1: ARP <br>Type=Request<br>MACSrc=c4:01:32:58:00:00, IPSrc=10.0.0.1<br>MACDst=c4:02:32:6b:00:00, IPDst=10.0.0.2<br>
-        2->>1: ARP <br>Type=Reply<br>MACSrc=c4:02:32:6b:00:00, IPSrc=10.0.0.2
-    """
 
-    arpreq = 'Note over {}: ARP <br>Type=Request<br>MACSrc={}, IPSrc={}<br>MACDst={}, IPDst={}<br>'
-    arpreply = '{}->>{}: ARP <br>Type=Reply<br>MACSrc={}, IPSrc={}'
-
+    msg = ''
     if arp.op == 1:
-        return arpreq.format(
-            socket.inet_ntoa(arp.spa),  # IP Src
-            format_mac(arp.sha),  # MAC Src
-            socket.inet_ntoa(arp.spa),  # IP Src
-            format_mac(arp.tha),  # MAC Dst
-            socket.inet_ntoa(arp.tpa),  # IP Dst
-        )
+        msg = 'Note over {}: ARP <br>Type=Request<br>MACSrc={}, IPSrc={}<br>MACDst={}, IPDst={}<br>'
     else:
-        return arpreply.format(
-            socket.inet_ntoa(arp.spa),  # IP Src
-            socket.inet_ntoa(arp.tpa),  # IP Dst
-            format_mac(arp.sha),
-            socket.inet_ntoa(arp.spa),  # IP Src
-        )
+        msg = 'Note over {}: ARP <br>Type=Reply<br>MACSrc={}, IPSrc={}<br>MACDst={}, IPDst={}<br>'
+    return msg.format(
+        socket.inet_ntoa(arp.spa),  # IP Src
+        format_mac(arp.sha),  # MAC Src
+        socket.inet_ntoa(arp.spa),  # IP Src
+        format_mac(arp.tha),  # MAC Dst
+        socket.inet_ntoa(arp.tpa),  # IP Dst
+    )
 
 
 def parse_icmp(buf: dpkt.icmp.ICMP):
@@ -141,10 +130,9 @@ if __name__ == "__main__":
             print('\t', msg, parse_tcp_udp(eth.data))
         if isinstance(eth.data, dpkt.ip.IP):
             print('\t', msg, parse_ip4(eth.data))
-            print('AFASFFas', eth)
         if isinstance(eth.data, dpkt.http.Message):
             print('\t', msg, parse_http(eth.data))
         if not isinstance(eth.data, (dpkt.arp.ARP, dpkt.icmp.ICMP, dpkt.tcp.TCP, dpkt.udp.UDP, dpkt.ip.IP, dpkt.http.Message)):
             # print('invlid', eth)
             continue
-        count += 1
+        # count += 1
