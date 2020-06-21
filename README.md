@@ -69,8 +69,11 @@ Supported protocols and values that are shown in the sequence diagram.
 ### Application Layer (OSI L7)
 - [DHCP](https://en.wikipedia.org/wiki/DHCP)
   - Operation
-  - Client Address
-  - Server Address
+  - Client IP Address
+  - Your IP Address
+  - Server IP Address
+  - Gateway IP Address
+  - Client Hardware Address
 - [DNS](https://en.wikipedia.org/wiki/DNS)
   - Operation
   - Name
@@ -151,6 +154,19 @@ sequenceDiagram
 	192.168.0.107->>216.239.38.21: TCP [s_port=50302 d_port=80]<br>IP [v=4 ip_src=192.168.0.107, ip_dst=216.239.38.21 proto=TCP ttl=64 id=0]<br>ETH [src=a4:83:e7:17:09:33 dst=1c:3b:f3:3c:04:26 type=0x0800]
 	216.239.38.21->>192.168.0.107: TCP [s_port=80 d_port=50302]<br>IP [v=4 ip_src=216.239.38.21, ip_dst=192.168.0.107 proto=TCP ttl=113 id=5044]<br>ETH [src=1c:3b:f3:3c:04:26 dst=a4:83:e7:17:09:33 type=0x0800]
 	192.168.0.107->>216.239.38.21: TCP [s_port=50302 d_port=80]<br>IP [v=4 ip_src=192.168.0.107, ip_dst=216.239.38.21 proto=TCP ttl=64 id=0]<br>ETH [src=a4:83:e7:17:09:33 dst=1c:3b:f3:3c:04:26 type=0x0800]
+```
+
+### DHCP Example
+```sh
+$ python3 parser.py examples/dhcp.pcap
+```
+
+```mermaid
+sequenceDiagram
+	0.0.0.0->>255.255.255.255: DHCP [op=Req ciaddr=0.0.0.0 yiaddr=0.0.0.0 siaddr=0.0.0.0 giaddr=0.0.0.0 chaddr=00:0b:82:01:fc:42]<br>UDP [s_port=68  d_port=67]<br>IP [v=4 ip_src=0.0.0.0, ip_dst=255.255.255.255 proto=UDP ttl=250 id=43062]<br>ETH [src=00:0b:82:01:fc:42 dst=ff:ff:ff:ff:ff:ff type=0x0800]
+	192.168.0.1->>192.168.0.10: DHCP [op=Rep ciaddr=0.0.0.0 yiaddr=192.168.0.10 siaddr=192.168.0.1 giaddr=0.0.0.0 chaddr=00:0b:82:01:fc:42]<br>UDP [s_port=67  d_port=68]<br>IP [v=4 ip_src=192.168.0.1, ip_dst=192.168.0.10 proto=UDP ttl=128 id=1093]<br>ETH [src=00:08:74:ad:f1:9b dst=00:0b:82:01:fc:42 type=0x0800]
+	0.0.0.0->>255.255.255.255: DHCP [op=Req ciaddr=0.0.0.0 yiaddr=0.0.0.0 siaddr=0.0.0.0 giaddr=0.0.0.0 chaddr=00:0b:82:01:fc:42]<br>UDP [s_port=68  d_port=67]<br>IP [v=4 ip_src=0.0.0.0, ip_dst=255.255.255.255 proto=UDP ttl=250 id=43063]<br>ETH [src=00:0b:82:01:fc:42 dst=ff:ff:ff:ff:ff:ff type=0x0800]
+	192.168.0.1->>192.168.0.10: DHCP [op=Rep ciaddr=0.0.0.0 yiaddr=192.168.0.10 siaddr=0.0.0.0 giaddr=0.0.0.0 chaddr=00:0b:82:01:fc:42]<br>UDP [s_port=67  d_port=68]<br>IP [v=4 ip_src=192.168.0.1, ip_dst=192.168.0.10 proto=UDP ttl=128 id=1094]<br>ETH [src=00:08:74:ad:f1:9b dst=00:0b:82:01:fc:42 type=0x0800]
 ```
 
 ### Complete execution of almost all protocols

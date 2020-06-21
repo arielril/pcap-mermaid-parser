@@ -1,3 +1,5 @@
+import socket
+import struct
 from dpkt import dns, udp, dhcp
 
 from .util import *
@@ -50,18 +52,21 @@ def parse_dhcp(udp_data) -> str:
     """
     dhcp_p = dhcp.DHCP(udp_data)
 
-    msg = 'DHCP [op={} ciaddr={} siaddr={}]'
+    msg = 'DHCP [op={} ciaddr={} yiaddr={} siaddr={} giaddr={} chaddr={}]'
 
     op = ''
-    ciaddr = dhcp_p.ciaddr
-    siaddr = dhcp_p.siaddr
+    ciaddr = socket.inet_ntoa(struct.pack('!I', dhcp_p.ciaddr))
+    yiaddr = socket.inet_ntoa(struct.pack('!I', dhcp_p.yiaddr))
+    siaddr = socket.inet_ntoa(struct.pack('!I', dhcp_p.siaddr))
+    giaddr = socket.inet_ntoa(struct.pack('!I', dhcp_p.giaddr))
+    chaddr = format_mac(dhcp_p.chaddr)
 
     if dhcp_p.op == dhcp.DHCP_OP_REQUEST:
         op = 'Req'
     else:
         op = 'Rep'
 
-    return msg.format(op, ciaddr, siaddr)
+    return msg.format(op, ciaddr, yiaddr, siaddr, giaddr, chaddr)
 
 
 def parse_udp(udp_p: udp.UDP) -> iter:

@@ -1,6 +1,11 @@
 import socket
 from dpkt import ip
 
+
+def format_mac(b_mac: bytearray):
+    return ':'.join('{:02x}'.format(x) for x in b_mac)
+
+
 ip_proto_map = {
     1: 'ICMP',
     6: 'TCP',
