@@ -38,6 +38,17 @@ udp_port_map = {
     5353: 'mDNS',
 }
 
+icmp_description = {
+    0: 'Echo reply',
+    3: 'Destination unreachable',
+    5: 'Redirect message',
+    8: 'Echo request',
+    9: 'Router advertisement',
+    10: 'Router solicitation',
+    11: 'Time exceeded',
+    30: 'Traceroute',
+}
+
 
 def get_ip_srcdst(buf: ip.IP):
     ip_src = socket.inet_ntoa(buf.src)
@@ -61,3 +72,9 @@ def get_tcp_protocol(port: int) -> str:
     if port in tcp_port_map.keys():
         return tcp_port_map[port]
     return ''
+
+
+def get_icmp_description(tp: int, code: int) -> str:
+    if tp in icmp_description.keys():
+        return icmp_description[tp]
+    return 'N/A'
