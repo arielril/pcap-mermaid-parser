@@ -21,6 +21,16 @@ optional arguments:
                         Number of packets to parse
 ```
 
+### Dependencies
+- Python >= 3
+- DPKT >= 1.9.2
+
+To install the dependencies for this project you can run this command:
+
+```sh
+$ pip3 install -r dependencies.txt
+```
+
 ## Protocols
 Supported protocols and values that are shown in the sequence diagram.
 
@@ -184,15 +194,17 @@ sequenceDiagram
 Here is a list of resources used to build this parser. Not all of the resources are being used in the final version, they were used for knowledge before I started to develop this parser.
 
 - [Mermaid Diagrams](https://mermaid-js.github.io/mermaid/#/flowchart)
+- [DPKT Python](https://dpkt.readthedocs.io/en/latest/index.html). Tutorial [example](https://jon.oberheide.org/blog/2008/10/15/dpkt-tutorial-2-parsing-a-pcap-file/). Program [example](https://chains.readthedocs.io/en/latest/)
+- [cheatsheet dpkt](https://engineering-notebook.readthedocs.io/en/latest/engineering/dpkt.html)
+- [DPKT User Doc](http://www.commercialventvac.com/dpkt.html#mozTocId319619)
+- [DPKT User Examples](https://github.com/jeffsilverm/dpkt_doc)
 - [WinPcap in your programs](https://www.winpcap.org/docs/docs_412/html/group__wpcapsamps.html). Pcap file parser in c/c++
 - [PcapPlusPlus](https://pcapplusplus.github.io/docs/tutorials/intro). Pcap tutorial in c++
 - [Reading Pcap files with Scapy](https://incognitjoe.github.io/reading-pcap-with-scapy.html). Pcap parsing with [scapy](https://scapy.readthedocs.io/en/latest/introduction.html)
 - [How to capture and analyze packets with tcpdum](https://www.linuxtechi.com/capture-analyze-packets-tcpdump-command-linux/)
-- [DPKT Python](https://dpkt.readthedocs.io/en/latest/index.html). Tutorial [example](https://jon.oberheide.org/blog/2008/10/15/dpkt-tutorial-2-parsing-a-pcap-file/). Program [example](https://chains.readthedocs.io/en/latest/)
 - [pcap-ct](https://pypi.org/project/pcap-ct/)
 - [pypcap](https://github.com/pynetwork/pypcap)
 - [sample](https://wiki.wireshark.org/SampleCaptures) captures wireshark
-- [cheatsheet dpkt](https://engineering-notebook.readthedocs.io/en/latest/engineering/dpkt.html)
 
 ## Roadmap
 - [] Add live presentation after parsing the .pcap file
