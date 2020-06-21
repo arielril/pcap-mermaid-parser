@@ -223,8 +223,8 @@ Here is a list of resources used to build this parser. Not all of the resources 
 - [sample](https://wiki.wireshark.org/SampleCaptures) captures wireshark
 
 ## Roadmap
-- [] Add live presentation after parsing the .pcap file
-- [] Add support fore more protocols
-- [] Add filters for the parsing like [tcpdump filters](https://www.tcpdump.org/manpages/pcap-filter.7.html)
-- [] Add colored visual representation of the request and responses for each protocol
-- [] Add live packet capture and parsing of packets
+- [ ] Add live presentation after parsing the .pcap file
+- [ ] Add support fore more protocols
+- [ ] Add filters for the parsing like [tcpdump filters](https://www.tcpdump.org/manpages/pcap-filter.7.html)
+- [ ] Add colored visual representation of the request and responses for each protocol
+- [ ] Add live packet capture and parsing of packets
